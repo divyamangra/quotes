@@ -2,16 +2,26 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
 function Ratings(props) {
-
   let quoteDetails = {};
-  let seenQuotesArray = {};
+  // let seenQuotesArray = {};
+  let [index, SetIndex] = useState(0);
+  let GlobalArray = [];
+  let seenItemsVar = window.sessionStorage.getItem("seenItems");
+  if (seenItemsVar) {
+    GlobalArray = JSON.parse(seenItemsVar);
+  }
+
   let addtoArray = item => {
     if (item) {
       quoteDetails.text = props.text;
       quoteDetails.author = props.author;
       quoteDetails.ratings = item;
-      seenQuotesArray[props.text] = quoteDetails;
-      window.sessionStorage.setItem(props.text, JSON.stringify(quoteDetails));
+      quoteDetails.key = props.key;
+      GlobalArray.push(quoteDetails);
+
+      window.sessionStorage.setItem("seenItems", JSON.stringify(GlobalArray));
+
+      SetIndex(index + 1);
       setTimeout(() => {
         window.location.reload();
       }, 250);
@@ -25,17 +35,19 @@ function Ratings(props) {
       {starsArray.map(i => {
         const ratingVal = i + 1;
         return (
-          <label>
+          <label key={"label" + i}>
             <input
               type="radio"
               name="ratingsradio"
               value={ratingVal}
+              key={"rating" + i}
               onClick={() => {
                 setRating(ratingVal);
                 addtoArray(ratingVal);
               }}
             />
             <FaStar
+              key={"star" + i}
               className="starcolor"
               color={ratingVal <= rating ? "yellow" : "grey"}
               size={100}

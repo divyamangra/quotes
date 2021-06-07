@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import "./SeenQuotes.css";
 function SeenQuotes() {
-  let arrayofquotes = [];
-  let arrayofquoteKeys = Object.keys(sessionStorage);
-  arrayofquoteKeys.map(key =>
-    arrayofquotes.push(JSON.parse(sessionStorage[key]))
-  );
+  let AllQuotesSeen = () => {
+    let seenItemsVar = window.sessionStorage.getItem("seenItems");
+    return seenItemsVar ? JSON.parse(seenItemsVar) : [];
+  };
 
   return (
     <div className="seenQuotes">
-      {arrayofquotes.map(quote => (
+      {AllQuotesSeen().map(quote => (
         <div className="quoteDetails">
           <div>{quote.author}</div>
           <div>{quote.text}</div>
