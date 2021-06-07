@@ -1,5 +1,9 @@
 In the project directory, you can run:
 
+### `npm-install-all`
+
+Installs all the dependencies required for running the application
+
 ### `npm start`
 
 Runs the app in the development mode.\
