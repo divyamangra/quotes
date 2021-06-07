@@ -1,0 +1,11 @@
+.quoteDetails {
+  display: center;
+  width: 20%;
+  border: 15px solid green;
+  padding: 30px;
+  margin: 10px;
+}
+.seenQuotes {
+  display: block;
+  margin-left: 40%;
+}
